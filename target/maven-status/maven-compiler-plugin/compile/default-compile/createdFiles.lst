@@ -1,0 +1,13 @@
+press/turngeek/mycampaign/controller/ListDonationsController.class
+press/turngeek/mycampaign/controller/EditCampaignController.class
+press/turngeek/mycampaign/model/Donation.class
+press/turngeek/mycampaign/controller/DonateMoneyController.class
+press/turngeek/mycampaign/controller/EditDonationFormController.class
+press/turngeek/mycampaign/data/CampaignProducer.class
+press/turngeek/mycampaign/controller/Pages.class
+press/turngeek/mycampaign/controller/ListCampaignsController.class
+press/turngeek/mycampaign/model/Campaign.class
+press/turngeek/mycampaign/model/Account.class
+press/turngeek/mycampaign/model/Donation$Status.class
+press/turngeek/mycampaign/data/CampaignListProducer.class
+press/turngeek/mycampaign/data/CampaignProducer$Mode.class
