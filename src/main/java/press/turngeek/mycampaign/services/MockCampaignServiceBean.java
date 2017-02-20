@@ -1,66 +1,32 @@
-package press.turngeek.mycampaign.data;
+package press.turngeek.mycampaign.services;
 
-import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Alternative;
 
 import press.turngeek.mycampaign.model.Account;
 import press.turngeek.mycampaign.model.Campaign;
 import press.turngeek.mycampaign.model.Donation;
-import press.turngeek.mycampaign.model.Donation.Status;
-import press.turngeek.mycampaign.services.CampaignService;
-import press.turngeek.mycampaign.util.Events.Added;
-import press.turngeek.mycampaign.util.Events.Deleted;
 
-@SessionScoped
-
-public class CampaignListProducer implements Serializable {
-	private static final long serialVersionUID = -182866064791747156L;
-	private List<Campaign> campaigns;
-
-	@Inject
-	private CampaignService campaignService;
-	
-	@PostConstruct
-	public void init() {
-		campaigns = campaignService.getAllCampaigns();
-	}
-	
-	@Produces
-	@Named
-	public List<Campaign> getCampaigns() {
-		return campaigns;
-	}
-	
-	
-	public void onCampaignAdded(@Observes @Added Campaign campaign) {
-	    getCampaigns().add(campaign);
-	}
-	
-	public void onCampaignDeleted(@Observes @Deleted Campaign campaign) {
-	    getCampaigns().remove(campaign);
-	}
-	
-	public List<Campaign> createMockCampaigns() {
+@RequestScoped
+@Alternative
+public class MockCampaignServiceBean implements CampaignService {
+	@Override
+    public List<Campaign> getAllCampaigns() {
 		Donation donation1 = new Donation();
 		donation1.setDonorName("John Smith");
 		donation1.setAmount(20d);
 		donation1.setReceiptRequested(true);
-		donation1.setStatus(Status.TRANSFERRED);
+		donation1.setStatus(Donation.Status.TRANSFERRED);
 		donation1.setAccount(new Account(donation1.getDonorName(), 
 			"XXX Bank","DE44876543210000123456"));
 		Donation donation2 = new Donation();
 		donation2.setDonorName("Peter Jones");
 		donation2.setAmount(30d);
 		donation2.setReceiptRequested(false);
-		donation2.setStatus(Status.IN_PROCESS);
+		donation2.setStatus(Donation.Status.IN_PROCESS);
 		donation2.setAccount(new Account(donation2.getDonorName(), 
 			"YYY Bank","DE44864275310000654321"));
 		List<Donation> spenden = new LinkedList<>();

@@ -1,11 +1,11 @@
 package press.turngeek.mycampaign.controller;
 
-import press.turngeek.mycampaign.model.Donation.Status;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import java.io.Serializable;
 
-@SessionScoped
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+
+@RequestScoped
 @Named
 public class ListDonationsController implements Serializable {
 	private static final long serialVersionUID = 437878972432L;

@@ -2,6 +2,8 @@ package press.turngeek.mycampaign.model;
 import java.util.List;
 
 public class Campaign {
+	
+	
 	private String name;
 	private Double targetAmount;
 	private Double donationMinimum;

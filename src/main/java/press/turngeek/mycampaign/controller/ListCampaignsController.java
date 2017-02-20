@@ -2,14 +2,17 @@ package press.turngeek.mycampaign.controller;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Event;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import press.turngeek.mycampaign.data.CampaignProducer;
 import press.turngeek.mycampaign.model.Campaign;
+import press.turngeek.mycampaign.util.Events.Deleted;
 
-@SessionScoped
+
+@ViewScoped
 @Named
 public class ListCampaignsController implements Serializable {
 
@@ -17,6 +20,12 @@ public class ListCampaignsController implements Serializable {
 	
 	@Inject
 	private CampaignProducer campaignProducer;
+	
+	@Inject
+	@Deleted
+	private Event<Campaign> campaignDeleteEvent;
+
+	private Campaign campaignToDelete;
 
 	public String doAddCampaign() {
 		System.out.println("Add Campaign");
@@ -40,6 +49,11 @@ public class ListCampaignsController implements Serializable {
 		return Pages.LIST_DONATIONS;
 	}
 	public void doDeleteCampaign(Campaign campaign) {
-		System.out.println("Deletion not implemented, yet!");
+		this.campaignToDelete = campaign;
+		System.out.println("Campaign registered for deletion!");
+	}
+	
+	public void commitDeleteCampaign() {
+		campaignDeleteEvent.fire(campaignToDelete);
 	}
 }
