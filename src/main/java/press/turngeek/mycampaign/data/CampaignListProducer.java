@@ -1,11 +1,10 @@
 package press.turngeek.mycampaign.data;
 
-import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -18,11 +17,11 @@ import press.turngeek.mycampaign.model.Donation.Status;
 import press.turngeek.mycampaign.services.CampaignService;
 import press.turngeek.mycampaign.util.Events.Added;
 import press.turngeek.mycampaign.util.Events.Deleted;
+import press.turngeek.mycampaign.util.Events.Updated;
 
-@SessionScoped
-
-public class CampaignListProducer implements Serializable {
-	private static final long serialVersionUID = -182866064791747156L;
+@RequestScoped
+public class CampaignListProducer {
+	
 	private List<Campaign> campaigns;
 
 	@Inject
@@ -41,11 +40,18 @@ public class CampaignListProducer implements Serializable {
 	
 	
 	public void onCampaignAdded(@Observes @Added Campaign campaign) {
-	    getCampaigns().add(campaign);
+		campaignService.addCampaign(campaign);
+	    init();
 	}
 	
 	public void onCampaignDeleted(@Observes @Deleted Campaign campaign) {
-	    getCampaigns().remove(campaign);
+		campaignService.deleteCampaign(campaign);
+	    init();
+	}
+	
+	public void onCampaignUpdated(@Observes @Updated Campaign campaign) {
+	    campaignService.updateCampaign(campaign);
+	    init();
 	}
 	
 	public List<Campaign> createMockCampaigns() {

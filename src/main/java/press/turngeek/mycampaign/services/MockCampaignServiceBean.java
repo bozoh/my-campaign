@@ -54,4 +54,22 @@ public class MockCampaignServiceBean implements CampaignService {
 		ret.add(campaign2);
 		return ret;
 	}
+
+	@Override
+	public void addCampaign(Campaign campaign) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteCampaign(Campaign campaign) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateCampaign(Campaign campaign) {
+		// TODO Auto-generated method stub
+		
+	}
 }

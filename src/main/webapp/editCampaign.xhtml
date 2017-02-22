@@ -27,8 +27,7 @@
 									<f:passThroughAttribute name="placeholder"
 										value=
 											"#{msg['editCampaign.name_of_the_campaign']}" />
-									<f:validateRequired />
-									<f:validateLength minimum="4" maximum="30" />
+									
 								</p:inputText>
 								<p:message for="a_name" />
 								<h:outputLabel value=
@@ -36,15 +35,12 @@
 								</h:outputLabel>
 								<h:panelGroup>
 									<p:inputText id="a_targetAmount"
-										value=
-											"#{campaignProducer
-												.selectedCampaign.targetAmount}"
+										value="#{selectedCampaign.targetAmount}"
 										validatorMessage=
 											"#{msg['editCampaign.target_amount_validation']}">
 										<f:convertNumber maxFractionDigits="2" 
 											minFractionDigits="2" />
-										<f:validateRequired />
-										<f:validateDoubleRange minimum="10.0" />
+										
 									</p:inputText> EUR
 								</h:panelGroup>
 								<p:message for="a_targetAmount" />
@@ -54,14 +50,12 @@
 								<h:panelGroup>
 									<p:inputText id="a_donationMinimum"
 										value=
-											"#{campaignProducer
-												.selectedCampaign.donationMinimum}"
+											"#{selectedCampaign.donationMinimum}"
 										validatorMessage=
 										"#{msg['editCampaign.donation_amount_validation']}">
 										<f:convertNumber maxFractionDigits="2" 
 											minFractionDigits="2" />
-										<f:validateRequired />
-										<f:validateDoubleRange minimum="1.0" />
+										
 									</p:inputText> EUR
 								</h:panelGroup>
 								<p:message for="a_donationMinimum" />
@@ -74,9 +68,8 @@
 								</h:outputLabel>
 								<p:inputText id="b_name"
 									value=
-										"#{campaignProducer
-											.selectedCampaign.account.name}">
-									<f:validateRequired />
+										"#{selectedCampaign.account.name}">
+									
 								</p:inputText>
 								<p:message for="b_name" />
 								<h:outputLabel value=
@@ -84,9 +77,8 @@
 								</h:outputLabel>
 								<p:inputText id="b_iban"
 									value=
-										"#{campaignProducer
-											.selectedCampaign.account.iban}">
-									<f:validateRequired />
+										"#{selectedCampaign.account.iban}">
+									
 								</p:inputText>
 								<p:message for="b_iban" />
 								<h:outputLabel value=
@@ -94,9 +86,8 @@
 								</h:outputLabel>
 								<p:inputText id="b_name_bank"
 									value=
-										"#{campaignProducer
-											.selectedCampaign.account.nameOfBank}">
-									<f:validateRequired />
+										"#{selectedCampaign.account.nameOfBank}">
+									
 								</p:inputText>
 								<p:message for="b_name_bank" />
 							</h:panelGrid>

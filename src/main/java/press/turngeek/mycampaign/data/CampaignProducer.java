@@ -1,13 +1,14 @@
 package press.turngeek.mycampaign.data;
 
-import press.turngeek.mycampaign.model.Campaign;
+import java.io.Serializable;
+
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
-import java.io.Serializable;
+
+import press.turngeek.mycampaign.model.Campaign;
 
 @SessionScoped
-
 public class CampaignProducer implements Serializable {
 	private static final long serialVersionUID = -1828660647917534556L;
 

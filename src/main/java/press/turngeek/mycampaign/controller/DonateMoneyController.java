@@ -13,6 +13,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import press.turngeek.mycampaign.model.Donation;
+import press.turngeek.mycampaign.model.Donation.Status;
+import press.turngeek.mycampaign.services.DonationService;
 import press.turngeek.mycampaign.util.DomainLog;
 
 @ViewScoped
@@ -23,6 +25,9 @@ public class DonateMoneyController implements Serializable {
 	private String bgColor = "ffffff";
 	private Long campaignId;
 	private Donation donation;
+	
+	@Inject
+	private DonationService donationService;
 	
 	@Inject
 	private FacesContext facesContext;
@@ -59,6 +64,9 @@ public class DonateMoneyController implements Serializable {
 		this.bgColor = bgColor;
 	}
 	public String doDonation() {
+		getDonation().setStatus(Status.IN_PROCESS);
+		donationService.addDonation(getCampaignId(), getDonation());
+		
 		logger.log(Level.INFO, "log.donateMoney.thank_you", new Object[]{getDonation().getDonorName(), getDonation().getAmount()});
 		    final ResourceBundle resourceBundle = facesContext.getApplication().getResourceBundle(facesContext, "msg");
 		    final String msg = resourceBundle.getString("donateMoney.thank_you");
